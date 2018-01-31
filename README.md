@@ -1,3 +1,6 @@
+This app is rather slow as it is pulling and creating ~12000 components, please allow 4-10 seconds for the components to load and display data.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
