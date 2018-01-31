@@ -21,7 +21,7 @@ class Market extends Component {
         this.setState({
           items: results.data
         });
-        console.log(this.state.items[0].type_id);
+        console.log(this.state.items.length);
       })
       .catch(console.log);
   }
