@@ -1,0 +1,26 @@
+.market-obj {
+  height: 10vh;
+  width: 100%;
+  background: rgb(70, 70, 70);
+  border-color: white;
+  margin-top: 0.5vh;
+}
+
+ul li {
+  display: inline-block;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  color: white;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 16px;
+}
