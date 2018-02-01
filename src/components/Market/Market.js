@@ -13,6 +13,7 @@ class Market extends Component {
     this.getData = this.getData.bind(this);
   }
 
+  // initial data pull (needs to be getting typeID and typeName and sending to MarketObj components for them to do individual pulls) ** NEEDS WORK **
   getData() {
     axios
       .get(`${this.state.baseUrl}/markets/prices/?datasource=tranquility`)
@@ -26,6 +27,7 @@ class Market extends Component {
       .catch(console.log);
   }
 
+  // safe single pull of api
   apiLoop() {
     if (this.state.apiPulls === 0) {
       this.getData();
@@ -33,26 +35,10 @@ class Market extends Component {
         apiPulls: 1
       });
     }
-    // let arr = this.state.items;
-    // return arr.map((obj, index) => {
-    //   let type = obj.type_id;
-    //   let avg = obj.average_price;
-    //   let adj = obj.adjusted_price;
-    //   <MarketObj id={type} avg={avg} adj={adj} />;
-    // });
-    //   console.log("apiLoop started");
-    //   for (let i = 0; i < arr.length; i++) {
-    //     console.log(`LOOP ${i + 1} / ${arr.length}`);
-    //     let type = arr[i].type_id;
-    //     let avg = arr[i].average_price;
-    //     let adj = arr[i].adjusted_price;
-
-    //     <MarketObj id={type} avg={avg} adj={adj} />;
-    //   }
-    //   console.log("apiLoop completed");
   }
 
   render() {
+    // need to rework all of this to match to new style of this application
     this.apiLoop();
     let arr = this.state.items;
     let type;

@@ -5,12 +5,14 @@ class MarketObj extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favorite: false,
-      itemName: "",
-      typeID: "",
-      avgPrice: "",
-      adjPrice: "",
-      stateUp: 0
+      favorite: false, // determines if item has been favorite or not
+      itemName: "", // told by Market.js
+      typeID: "", // told by Market.js
+      lowSell: "", // pulls from orders api
+      highBuy: "", // pulls from orders api
+      dailyAvg: "", // pulls from history api
+      volume: "", // pulls from history api
+      stateUp: 0 // counts the amount of state updates
     };
   }
 
@@ -25,6 +27,7 @@ class MarketObj extends Component {
     x++;
   }
 
+  // favorite mechanic, attach to button and it favorites the item -- needs an unfavorite also
   favorite() {
     this.setState({
       favorite: true
