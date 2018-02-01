@@ -1,15 +1,15 @@
 .market-obj {
-  height: 10vh;
+  height: 9vh;
   width: 100%;
   background: rgb(70, 70, 70);
   border-color: white;
-  margin-top: 0.5vh;
+  margin-top: 0.1vh;
 }
 
 ul li {
   display: inline-block;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 7.5rem;
+  margin-right: 7.5rem;
   color: white;
 }
 
@@ -23,4 +23,9 @@ h2 {
 
 p {
   font-size: 16px;
+}
+
+ul li button {
+  padding-top: -2vh;
+  margin-bottom: 3vh;
 }
