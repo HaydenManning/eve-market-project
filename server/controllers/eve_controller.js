@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-let types = [];
+let regionID = "10000002";
 let baseURL = "https://esi.tech.ccp.is/latest";
 
 const readPrice = (req, res, next) => {
