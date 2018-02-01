@@ -3,7 +3,7 @@ const axios = require("axios");
 let types = [];
 let baseURL = "https://esi.tech.ccp.is/latest";
 
-const read = (req, res, next) => {
+const readPrice = (req, res, next) => {
   console.log(`retrieving data`);
   axios
     .get(`${baseURL}/markets/prices/?datasource=tranquility`)
@@ -14,5 +14,5 @@ const read = (req, res, next) => {
 };
 
 module.exports = {
-  read: read
+  readPrice: readPrice
 };
