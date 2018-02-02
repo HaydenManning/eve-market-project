@@ -1,16 +1,25 @@
 .market-obj {
   height: 10vh;
   width: 100%;
-  background: rgb(70, 70, 70);
-  border-color: white;
-  margin-top: 0.1vh;
+  background: #13293d;
+  font-family: "Roboto", sans-serif;
 }
 
-ul li {
+.stuff {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  margin-top: 0.75vh;
+  margin-bottom: 0.75vh;
+}
+
+.stuff li {
   display: inline-block;
   margin-left: 2.5rem;
   margin-right: 2.5rem;
-  color: white;
 }
 
 li {
@@ -18,14 +27,54 @@ li {
 }
 
 h2 {
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #1b98e0;
 }
 
 p {
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #e8f1f2;
 }
 
-ul li button {
-  padding-top: -2vh;
-  margin-bottom: 3vh;
+.content {
+  width: 65vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+}
+
+.typename {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
+.typename .typename-prop {
+  height: 8vh;
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.typename .typename-prop p {
+  position: relative;
+  top: -1vh;
+}
+
+.typename .typename-prop h2 {
+  position: relative;
+  bottom: -0.7vh;
 }

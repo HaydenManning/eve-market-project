@@ -13,6 +13,7 @@ class MarketObj extends Component {
       buy: [], // dump of buy orders api
       lowSell: "", // found by finding lowest sell from sell
       highBuy: "", // found by finding highest buy from buy
+      profitPerc: "", // provided by a method that gets the profit margin %
       profit: "", // provided by a method that gets the profit margin
       history: [], // dump of history api
       dailyAvg: "", // CALCULATION using volume && avgPrice to get Daily ISK in Jita for item
@@ -127,12 +128,12 @@ class MarketObj extends Component {
         lowTemp = arr[i].price;
       }
     }
-    // makes number a string with commas in correct places
-    lowTemp = lowTemp.toLocaleString();
     this.setState({
       sellApi: 1,
       lowSell: lowTemp
     });
+    // this method is being called at the end of both this method and the highest buy to guarantee that the method is ran with a full dataset.
+    this.calcProfitMargin(this.state.lowSell, this.state.highBuy);
   }
 
   // find the highest price using a (x > y) check and assigning x to a temp variable if it is higher than the current temp
@@ -147,12 +148,12 @@ class MarketObj extends Component {
         highTemp = arr[i].price;
       }
     }
-    // makes number a string with commas in correct places
-    highTemp = highTemp.toLocaleString();
     this.setState({
       buyApi: 1, // double checking that we are blocking the recall of api data
       highBuy: highTemp
     });
+    // this method is being called at the end of both this method and the lowest sell to guarantee that the method is ran with a full dataset.
+    this.calcProfitMargin(this.state.lowSell, this.state.highBuy);
   }
 
   calcProfitMargin(sell, buy) {
@@ -164,10 +165,15 @@ class MarketObj extends Component {
       let sellInt = parseInt(sell, 10);
       let buyInt = parseInt(buy, 10);
       let profit = sellInt - buyInt;
-      console.log(profit);
-      let margin = profit / sell * 100;
-      console.log(margin);
-      this.setState({ profit: margin });
+      let marginPercent = profit / sellInt;
+      let margin = marginPercent * 100;
+      // 2 decimal places
+      margin = margin.toFixed(2);
+      profit = Number(profit);
+      this.setState({
+        profitPerc: margin,
+        profit: profit
+      });
     }
   }
 
@@ -187,39 +193,50 @@ class MarketObj extends Component {
     this.setState({
       runApi: true
     });
-    this.calcProfitMargin(this.state.lowSell, this.state.highBuy);
   }
 
   render() {
     this.onRender();
     return (
       <div className="market-obj">
-        <ul>
-          <li>
-            <h2>ITEM NAME</h2>
-            <p>{this.props.typeName}</p>
-          </li>
-          <li>
-            <h2>TYPEID</h2>
-            <p>{this.props.id}</p>
-          </li>
-          <li>
-            <h2>DAILY MOVING AVERAGE</h2>
-            <p>{`${this.state.dailyAvg} ISK`}</p>
-          </li>
-          <li>
-            <h2>LOWEST SELL</h2>
-            <p>{`${this.state.lowSell} ISK`}</p>
-          </li>
-          <li>
-            <h2>HIGHEST BUY</h2>
-            <p>{`${this.state.highBuy} ISK`}</p>
-          </li>
-          <li>
-            <h2>PROFIT MARGIN</h2>
-            <p>{this.state.profit}</p>
-          </li>
-        </ul>
+        <div className="stuff">
+          <div className="typename">
+            <li>
+              <h2>TYPEID</h2>
+              <p>{this.props.id}</p>
+            </li>
+            <li className="typename-prop">
+              <h2>ITEM NAME</h2>
+              <p>{this.props.typeName}</p>
+            </li>
+          </div>
+          <div className="content">
+            <li>
+              <h2>LOWEST SELL</h2>
+              <p>{`${this.state.lowSell.toLocaleString()} ISK`}</p>
+            </li>
+            <li>
+              <h2>HIGHEST BUY</h2>
+              <p>{`${this.state.highBuy.toLocaleString()} ISK`}</p>
+            </li>
+            <li>
+              <h2>PROFIT</h2>
+              <p>{`${this.state.profit.toLocaleString()} ISK`}</p>
+            </li>
+            <li>
+              <h2>MARGIN</h2>
+              <p>{`${this.state.profitPerc}%`}</p>
+            </li>
+            <li>
+              <h2>DAILY MOVING AVERAGE</h2>
+              <p>{`${this.state.dailyAvg} ISK`}</p>
+            </li>
+            <li>
+              <h2>DAILY VOLUME</h2>
+              <p>{`${this.state.volume} Purchased`}</p>
+            </li>
+          </div>
+        </div>
       </div>
     );
   }

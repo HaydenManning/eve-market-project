@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import MarketObj from "./MarketObj/MarketObj";
+import("./Market.css");
 
 class Market extends Component {
   constructor(props) {
@@ -43,7 +44,9 @@ class Market extends Component {
     return (
       <div className="market-parent">
         <div className="market-header">
-          <h1>Items with 0 as price are out of stock or not recorded</h1>
+          <h1>
+            Items with missing values are a result of no market data for today
+          </h1>
         </div>
         <div className="market-obj">
           {arr.map((obj, index) => {

@@ -1,6 +1,7 @@
 const express = require("express");
 const { json } = require("body-parser");
 const axios = require("axios");
+const cors = require("cors");
 const {
   readPrice,
   pullIdNames,
@@ -12,6 +13,7 @@ const {
 const app = express();
 
 app.use(json());
+app.use(cors());
 
 // pulls type names and type ids JSON file (all items ~3.5k)
 app.get("/api/eve/types", pullIdNames);
