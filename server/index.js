@@ -13,7 +13,7 @@ const app = express();
 
 app.use(json());
 
-// pulls type names and type ids JSON file (all items ~50k)
+// pulls type names and type ids JSON file (all items ~3.5k)
 app.get("/api/eve/types", pullIdNames);
 
 // pulls fresh market prices

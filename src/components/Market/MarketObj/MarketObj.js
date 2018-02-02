@@ -16,16 +16,14 @@ class MarketObj extends Component {
     };
   }
 
-  updateState() {
-    this.setState({
-      itemName: this.props.id,
-      typeID: this.props.id,
-      avgPrice: this.props.avg,
-      adjPrice: this.props.adj
-    });
-    let x = this.state.stateUp;
-    x++;
-  }
+  // updateState() {
+  //   this.setState({
+  //     itemName: this.props.typeName,
+  //     typeID: this.props.id
+  //   });
+  //   let x = this.state.stateUp;
+  //   x++;
+  // }
 
   // favorite mechanic, attach to button and it favorites the item -- needs an unfavorite also
   favorite() {
@@ -43,20 +41,20 @@ class MarketObj extends Component {
           </li>
           <li>
             <h2>ITEM NAME</h2>
-            <p>{this.props.id}</p>
+            <p>{this.props.typeName}</p>
           </li>
           <li>
             <h2>TYPEID</h2>
             <p>{this.props.id}</p>
           </li>
-          <li>
+          {/*<li>
             <h2>AVERAGE PRICE</h2>
-            <p>{this.props.avg >= 0 ? this.props.avg : "0"}</p>
+           <p>{this.props.avg >= 0 ? this.props.avg : "0"}</p>
           </li>
           <li>
             <h2>ADJUSTED PRICE</h2>
-            <p>{this.props.adj}</p>
-          </li>
+           <p>{this.props.adj}</p>
+         </li> */}
         </ul>
       </div>
     );

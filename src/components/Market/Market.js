@@ -6,28 +6,25 @@ class Market extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      baseUrl: "https://esi.tech.ccp.is/latest",
-      items: [],
+      types: [],
       apiPulls: 0
     };
     this.getData = this.getData.bind(this);
   }
 
-  // initial data pull (needs to be getting typeID and typeName and sending to MarketObj components for them to do individual pulls) ** NEEDS WORK **
+  // initial data pull to get list of TypeID & Type Name
   getData() {
     axios
-      .get(`${this.state.baseUrl}/markets/prices/?datasource=tranquility`)
+      .get(`http://127.0.0.1:3005/api/eve/types`)
       .then(results => {
         console.log("SUCCESS!");
-        this.setState({
-          items: results.data
-        });
-        console.log(this.state.items.length);
+        this.setState({ types: results.data });
+        console.log(this.state.types.length);
       })
       .catch(console.log);
   }
 
-  // safe single pull of api
+  // safe pull of api makes sure not to pull getData more than once per application load
   apiLoop() {
     if (this.state.apiPulls === 0) {
       this.getData();
@@ -40,10 +37,9 @@ class Market extends Component {
   render() {
     // need to rework all of this to match to new style of this application
     this.apiLoop();
-    let arr = this.state.items;
-    let type;
-    let avg;
-    let adj;
+    let arr = this.state.types;
+    let typeID;
+    let typeName;
     return (
       <div className="market-parent">
         <div className="market-header">
@@ -51,10 +47,9 @@ class Market extends Component {
         </div>
         <div className="market-obj">
           {arr.map((obj, index) => {
-            type = obj.type_id;
-            avg = obj.average_price;
-            adj = obj.adjusted_price;
-            return <MarketObj id={type} avg={avg} adj={adj} />;
+            typeID = obj.TYPEID;
+            typeName = obj.TYPENAME;
+            return <MarketObj id={typeID} typeName={typeName} />;
           })}
         </div>
       </div>
