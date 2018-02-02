@@ -1,5 +1,10 @@
-This app is rather slow as it is pulling and creating ~12000 components, please allow 4-10 seconds for the components to load and display data.
+## Welcome to my eve-market-project
 
+This project is my first time creating an application without following a set of guides to help me through. My goal for this project was to create something that I had some interest in. Naturally numbers and video games collide and out comes Eve Online. Eve Online is an Online persistent MMORPG with a unique take on handling the in-game economy. Eve is often referred to as spreadsheets in space because the game looks like a spreadsheet and is all about min-maxing. This project pulls data from the Eve Online's Swagger API and displays it dynamically using React. The innerworkings have each individual component pulling their own data to speed up the initial render. However doing this can result in some slower speeds due to the sheer amount of api requests being made. Several elements per component are being dynamically calculated each time the api is pulled (ex. daily moving average) this is so that I can display information that can't be gotten from the api itself. 
+
+As this project is technically an assignment also I cannot cache API pulls to a database (this is a noDB project). However in the future once this has been presented I intend to continue developing this project in to a full fledged application with user tracking (authentication, favorites, peronalized home display, color settings) and API caching (store daily API pulls into a database which will open a whole new set of statistics that can be displayed and played with).
+
+If you find this project interesting feel free to reach out you can send me an email (My email can be found on my GitHub profile)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
