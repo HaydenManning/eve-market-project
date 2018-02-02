@@ -13,6 +13,7 @@ class MarketObj extends Component {
       buy: [], // dump of buy orders api
       lowSell: "", // found by finding lowest sell from sell
       highBuy: "", // found by finding highest buy from buy
+      profit: "", // provided by a method that gets the profit margin
       history: [], // dump of history api
       dailyAvg: "", // CALCULATION using volume && avgPrice to get Daily ISK in Jita for item
       volume: "", // Daily Volume in Jita for item
@@ -22,7 +23,8 @@ class MarketObj extends Component {
       histApi: 0, // limits the history call to 1 pull (the initial pull)
       buyApi: 0, // limits the buy order call to 1 pull (the initial pull)
       sellApi: 0, // limits the sell order call to 1 pull (the initial pull)
-      runApi: false // limits the initial run of all API
+      runApi: false, // limits the initial run of all API
+      profitCalc: false // limits to one calculation
     };
   }
 
@@ -153,6 +155,22 @@ class MarketObj extends Component {
     });
   }
 
+  calcProfitMargin(sell, buy) {
+    if (
+      this.state.lowSell !== "" &&
+      this.state.highBuy !== "" &&
+      this.state.profitCalc === false
+    ) {
+      let sellInt = parseInt(sell, 10);
+      let buyInt = parseInt(buy, 10);
+      let profit = sellInt - buyInt;
+      console.log(profit);
+      let margin = profit / sell * 100;
+      console.log(margin);
+      this.setState({ profit: margin });
+    }
+  }
+
   // Once the object enters the render phase it will check if it needs to pull data yet by matching the following criteria
   // WITHOUT THIS EVERYTHING BREAKS
   onRender() {
@@ -169,6 +187,7 @@ class MarketObj extends Component {
     this.setState({
       runApi: true
     });
+    this.calcProfitMargin(this.state.lowSell, this.state.highBuy);
   }
 
   render() {
@@ -196,10 +215,10 @@ class MarketObj extends Component {
             <h2>HIGHEST BUY</h2>
             <p>{`${this.state.highBuy} ISK`}</p>
           </li>
-          {/*<li>
-            <h2>ADJUSTED PRICE</h2>
-           <p>{this.props.adj}</p>
-         </li> */}
+          <li>
+            <h2>PROFIT MARGIN</h2>
+            <p>{this.state.profit}</p>
+          </li>
         </ul>
       </div>
     );
