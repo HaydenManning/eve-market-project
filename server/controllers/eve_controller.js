@@ -1,5 +1,5 @@
 const axios = require("axios");
-const types = require("./../../jitaTestSet.json");
+const types = require("./../../test.json");
 
 let regionID = "10000002";
 let baseURL = "https://esi.tech.ccp.is/latest";

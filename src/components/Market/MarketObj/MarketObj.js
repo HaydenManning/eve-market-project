@@ -14,12 +14,24 @@ class MarketObj extends Component {
       lowSell: "", // found by finding lowest sell from sell
       highBuy: "", // found by finding highest buy from buy
       history: [], // dump of history api
-      dailyAvg: "", // CALCULATION Daily ISK in Jita for item
+      dailyAvg: "", // CALCULATION using volume && avgPrice to get Daily ISK in Jita for item
       volume: "", // Daily Volume in Jita for item
       avgPrice: "", // Daily average price used with volume to find daily moving average gotten from history
+      // BELOW THIS IS API/STATE TRACKING
       stateUp: 0, // counts the amount of state updates
-      histApi: 0 // limits the history call to 1 pull (the initial pull)
+      histApi: 0, // limits the history call to 1 pull (the initial pull)
+      buyApi: 0, // limits the buy order call to 1 pull (the initial pull)
+      sellApi: 0, // limits the sell order call to 1 pull (the initial pull)
+      runApi: false // limits the initial run of all API
     };
+  }
+
+  // WITHOUT THIS EVERYTHING BREAKS
+  componentDidMount() {
+    this.updateState();
+    this.getHistory();
+    this.getBuyOrders();
+    this.getSellOrders();
   }
 
   //updates state for items that are not being directly imported into this component
@@ -33,14 +45,7 @@ class MarketObj extends Component {
     }
   }
 
-  // favorite mechanic, attach to button and it favorites the item -- needs an unfavorite also
-  // favorite() {
-  //   this.setState({
-  //     favorite: true
-  //   });
-  // }
-
-  // call for market history of specific type id
+  // call for market history of provided type id
   getHistory() {
     if (this.state.histApi === 0) {
       axios
@@ -50,35 +55,127 @@ class MarketObj extends Component {
         .then(results => {
           this.setState({
             history: results.data,
-            histApi: 1,
+            histApi: 1, // stops getHistory from making a second call
             volume: results.data[results.data.length - 1].volume,
             avgPrice: results.data[results.data.length - 1].average
           });
+          // call method to get the Daily ISK
           this.calcDailyAvg();
         })
         .catch(console.log);
     }
   }
 
+  // call for buy orders of provided type id
+  getBuyOrders() {
+    if (this.state.buyApi === 0) {
+      axios
+        .get(`http://127.0.0.1:3005/api/eve/markets/buy/${this.state.typeID}`)
+        .then(results => {
+          this.setState({
+            buy: results.data,
+            buyApi: 1 // stops getBuyOrders from making a second call
+          });
+          // call method to calculate high passing in the array of objects we just got
+          this.findHighestBuy(this.state.buy);
+        })
+        .catch(console.log);
+    }
+  }
+
+  // call for sell orders of provided type id
+  getSellOrders() {
+    if (this.state.sellApi === 0) {
+      axios
+        .get(`http://127.0.0.1:3005/api/eve/markets/sell/${this.state.typeID}`)
+        .then(results => {
+          this.setState({
+            sell: results.data,
+            sellApi: 1 // stops getSellOrders from making a second call
+          });
+          // call method to calculate low passing in the array of objects we just got
+          this.findLowestSell(this.state.sell);
+        })
+        .catch(console.log);
+    }
+  }
+
+  // calculates daily moving average (amount of ISK through that market)
   calcDailyAvg() {
     let tempVar = 0;
     tempVar =
       parseInt(this.state.volume, 10) * parseInt(this.state.avgPrice, 10);
+    // makes number a string with commas in correct places
     tempVar = tempVar.toLocaleString();
     this.setState({
+      histApi: 1,
       dailyAvg: tempVar
     });
   }
 
-  render() {
-    this.updateState();
+  // finds the lowest price using a (x < y) check and assigning x to a temp variable if it is lower than the current temp
+  findLowestSell(arr) {
+    let lowTemp = 0; // will always be an integer
+    for (let i = 0; i < arr.length; i++) {
+      // if first number were looping over assign to temp
+      if (lowTemp === 0) {
+        lowTemp = arr[i].price;
+        // check to see if newest number is > current temp
+      } else if (arr[i].price < lowTemp) {
+        lowTemp = arr[i].price;
+      }
+    }
+    // makes number a string with commas in correct places
+    lowTemp = lowTemp.toLocaleString();
+    this.setState({
+      sellApi: 1,
+      lowSell: lowTemp
+    });
+  }
+
+  // find the highest price using a (x > y) check and assigning x to a temp variable if it is higher than the current temp
+  findHighestBuy(arr) {
+    let highTemp = 0; // will always be an integer
+    for (let i = 0; i < arr.length; i++) {
+      // if first number were looping over assign to temp
+      if (highTemp === 0) {
+        highTemp = arr[i].price;
+        // check to see if newest number is > current temp
+      } else if (arr[i].price > highTemp) {
+        highTemp = arr[i].price;
+      }
+    }
+    // makes number a string with commas in correct places
+    highTemp = highTemp.toLocaleString();
+    this.setState({
+      buyApi: 1, // double checking that we are blocking the recall of api data
+      highBuy: highTemp
+    });
+  }
+
+  // Once the object enters the render phase it will check if it needs to pull data yet by matching the following criteria
+  // WITHOUT THIS EVERYTHING BREAKS
+  onRender() {
+    this.state.typeID !== "" && this.state.runApi === false
+      ? this.runGets()
+      : false;
+  }
+
+  // If the ternary comes back true the following methods will run which will gather data and update state completely
+  runGets() {
+    this.getBuyOrders();
     this.getHistory();
+    this.getSellOrders();
+    this.setState({
+      runApi: true
+    });
+  }
+
+  render() {
+    this.onRender();
     return (
       <div className="market-obj">
         <ul>
-          <li>
-            <button>FAVORITE</button>
-          </li>
           <li>
             <h2>ITEM NAME</h2>
             <p>{this.props.typeName}</p>
@@ -90,6 +187,14 @@ class MarketObj extends Component {
           <li>
             <h2>DAILY MOVING AVERAGE</h2>
             <p>{`${this.state.dailyAvg} ISK`}</p>
+          </li>
+          <li>
+            <h2>LOWEST SELL</h2>
+            <p>{`${this.state.lowSell} ISK`}</p>
+          </li>
+          <li>
+            <h2>HIGHEST BUY</h2>
+            <p>{`${this.state.highBuy} ISK`}</p>
           </li>
           {/*<li>
             <h2>ADJUSTED PRICE</h2>
