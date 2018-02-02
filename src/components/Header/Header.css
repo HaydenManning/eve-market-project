@@ -1,0 +1,12 @@
+.header {
+  background-color: #222;
+  height: 5vh;
+  padding: 2vh;
+  color: #e8f1f2;
+}
+
+.title {
+  position: fixed;
+  top: 0vh;
+  left: 1vw;
+}

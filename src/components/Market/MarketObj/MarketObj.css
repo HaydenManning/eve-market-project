@@ -39,7 +39,7 @@ p {
 }
 
 .content {
-  width: 65vw;
+  width: 75vw;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -49,7 +49,6 @@ p {
 }
 
 .typename {
-  width: 30vw;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -60,7 +59,6 @@ p {
 
 .typename .typename-prop {
   height: 8vh;
-  width: 15vw;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
