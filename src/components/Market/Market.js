@@ -46,7 +46,7 @@ class Market extends Component {
       <div className="market-parent">
         <div className="market-header">
           <div className="header-text">
-            <h1>Items with values missing is the result of API call errors</h1>
+            <h1>Take a Note</h1>
           </div>
           <div className="notes">
             <MarketNotes />
