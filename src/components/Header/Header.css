@@ -6,7 +6,7 @@
 }
 
 .title {
-  position: fixed;
+  position: absolute;
   top: 0vh;
   left: 1vw;
 }
