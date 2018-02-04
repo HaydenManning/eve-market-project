@@ -9,6 +9,9 @@ class MarketNotes extends Component {
       input: "",
       note: ""
     };
+    this.post = this.post.bind(this);
+    this.destroy = this.destroy.bind(this);
+    this.put = this.put.bind(this);
   }
 
   // handles changes in the input field
@@ -21,17 +24,44 @@ class MarketNotes extends Component {
 
   // posts note data to the server has component check if it needs to create a Note or not
   post() {
-    axios.post();
+    const { input } = this.state;
+    axios
+      .post("http://127.0.0.1:3005/api/newnote", { input })
+      .then(results => {
+        alert(results.data.message);
+        if (this.state.note === "") {
+          this.setState({
+            note: this.state.input
+          });
+        }
+      })
+      .catch(console.log);
   }
 
   // deletes note data from the server
   destroy() {
-    axios.delete();
+    axios
+      .delete("http://127.0.0.1:3005/api/notes/delete/0")
+      .then(results => {
+        alert(results.data.message);
+        this.setState({
+          note: ""
+        });
+      })
+      .catch(console.log);
   }
 
   // updates note data on both server and component
   put() {
-    axios.put();
+    const { input } = this.state;
+    console.log(input, "hello");
+    axios
+      .put("http://127.0.0.1:3005/api/notes/0", { input })
+      .then(results => {
+        alert(results.data.message);
+        this.setState({ note: this.state.input });
+      })
+      .catch(console.log);
   }
 
   render() {

@@ -9,6 +9,12 @@ const {
   readHistory,
   readSellOrders
 } = require("./controllers/eve_controller.js");
+const {
+  readNote,
+  postNote,
+  putNote,
+  deleteNote
+} = require("./controllers/note_controller.js");
 
 const app = express();
 
@@ -29,6 +35,18 @@ app.get("/api/eve/markets/buy/:id", readBuyOrders);
 
 // pulls current sell orders api to help calculate lowest sell order
 app.get("/api/eve/markets/sell/:id", readSellOrders);
+
+// pulls notes
+app.get("/api/notes", readNote);
+
+// creates a note NEEDS WORK
+app.post("/api/newnote", postNote);
+
+// updates a note
+app.put("/api/notes/:id", putNote);
+
+// deletes a note
+app.delete("/api/notes/delete/:id", deleteNote);
 
 // when accessing with localhost use http://localhost:3005 or http://127.0.0.1:3005 followed by api link
 const port = 3005;
