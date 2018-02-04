@@ -3,10 +3,37 @@
   height: 5vh;
   padding: 2vh;
   color: #e8f1f2;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
 
 .title {
   position: absolute;
   top: 0vh;
   left: 1vw;
+}
+
+#github {
+  margin-right: 1vw;
+  color: #e8f1f2;
+}
+
+#github:hover {
+  color: #1b98e0;
+  cursor: pointer;
+}
+
+#email {
+  margin-right: 2vw;
+  margin-left: 1vw;
+  color: #e8f1f2;
+}
+
+#email:hover {
+  color: #1b98e0;
+  cursor: pointer;
 }
