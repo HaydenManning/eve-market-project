@@ -53,11 +53,11 @@ class Market extends Component {
           </div>
         </div>
         <div className="market-obj">
-          {/*arr.map((obj, index) => {
+          {arr.map((obj, index) => {
             typeID = obj.TYPEID;
             typeName = obj.TYPENAME;
             return <MarketObj id={typeID} typeName={typeName} />;
-          })*/}
+          })}
         </div>
       </div>
     );

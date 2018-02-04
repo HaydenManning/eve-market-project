@@ -1,22 +1,102 @@
 [
   {
-    "TYPEID": 1999,
-    "TYPENAME": "Tracking Enhancer II"
+    "TYPEID": 44992,
+    "TYPENAME": "PLEX"
   },
   {
-    "TYPEID": 14222,
-    "TYPENAME": "Domination Medium Proton Smartbomb"
+    "TYPEID": 40519,
+    "TYPENAME": "Skill Extractor"
   },
   {
-    "TYPEID": 31159,
-    "TYPENAME": "Small Hyperspatial Velocity Optimizer I"
+    "TYPEID": 40520,
+    "TYPENAME": "Large Skill Injector"
   },
   {
-    "TYPEID": 32872,
-    "TYPENAME": "Algos"
+    "TYPEID": 45635,
+    "TYPENAME": "Small Skill Injector"
   },
   {
-    "TYPEID": 25598,
-    "TYPENAME": "Tripped Power Circuit"
+    "TYPENAME": "Tengu",
+    "TYPEID": 29984
+  },
+  {
+    "TYPEID": 34,
+    "TYPENAME": "Tritanium"
+  },
+  {
+    "TYPEID": 35,
+    "TYPENAME": "Pyerite"
+  },
+  {
+    "TYPENAME": "Rhea",
+    "TYPEID": 28844
+  },
+  {
+    "TYPENAME": "Ark",
+    "TYPEID": 28850
+  },
+  {
+    "TYPENAME": "Anshar",
+    "TYPEID": 28848
+  },
+  {
+    "TYPENAME": "Nomad",
+    "TYPEID": 28846
+  },
+  {
+    "TYPENAME": "Providence",
+    "TYPEID": 20183
+  },
+  {
+    "TYPENAME": "Charon",
+    "TYPEID": 20185
+  },
+  {
+    "TYPENAME": "Obelisk",
+    "TYPEID": 20187
+  },
+  {
+    "TYPENAME": "Fenrir",
+    "TYPEID": 20189
+  },
+  {
+    "TYPENAME": "Vagabond",
+    "TYPEID": 11999
+  },
+  {
+    "TYPENAME": "Devoter",
+    "TYPEID": 12017
+  },
+  {
+    "TYPENAME": "Onyx",
+    "TYPEID": 11995
+  },
+  {
+    "TYPENAME": "Phobos",
+    "TYPEID": 12021
+  },
+  {
+    "TYPENAME": "Broadsword",
+    "TYPEID": 12013
+  },
+  {
+    "TYPENAME": "Guardian",
+    "TYPEID": 11987
+  },
+  {
+    "TYPENAME": "Basilisk",
+    "TYPEID": 11985
+  },
+  {
+    "TYPENAME": "Oneiros",
+    "TYPEID": 11989
+  },
+  {
+    "TYPENAME": "Scimitar",
+    "TYPEID": 11978
+  },
+  {
+    "TYPEID": 17843,
+    "TYPENAME": "Vexor Navy Issue"
   }
 ]

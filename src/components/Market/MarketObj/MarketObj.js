@@ -233,7 +233,7 @@ class MarketObj extends Component {
             </li>
             <li>
               <h2>DAILY VOLUME</h2>
-              <p>{`${this.state.volume} Purchased`}</p>
+              <p>{`${this.state.volume.toLocaleString()} Purchased`}</p>
             </li>
           </div>
         </div>
