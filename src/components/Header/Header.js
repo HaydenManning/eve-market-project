@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="header-left">
-          <h1 className="title">Welcome to Eve Ships - Market Edition!</h1>
+          <h1 className="title">Welcome to the Eve Market!</h1>
         </div>
         <div className="header-right">
           <a
