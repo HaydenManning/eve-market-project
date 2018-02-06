@@ -1,5 +1,5 @@
 .market-obj {
-  height: 10vh;
+  height: 10vh; /* 10vh for 1080p //// 22vh for macbook screen */
   width: 100%;
   background: #13293d;
   font-family: "Roboto", sans-serif;
