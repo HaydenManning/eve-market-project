@@ -1,5 +1,5 @@
 .market-obj {
-  height: 10vh; /* 10vh for 1080p //// 22vh for macbook screen */
+  height: 22vh; /* 10vh for 1080p //// 22vh for macbook screen */
   width: 100%;
   background: #13293d;
   font-family: "Roboto", sans-serif;
@@ -75,4 +75,10 @@ p {
 .typename .typename-prop h2 {
   position: relative;
   bottom: -0.7vh;
+}
+
+@media screen and (min-width: 1600px) {
+  .market-obj {
+    height: 10vh;
+  }
 }

@@ -18,6 +18,8 @@ const {
 
 const app = express();
 
+// serving production files
+app.use(express.static(`${__dirname}/../build/`));
 app.use(json());
 app.use(cors());
 
@@ -47,6 +49,11 @@ app.put("/api/notes/:id", putNote);
 
 // deletes a note
 app.delete("/api/notes/delete/:id", deleteNote);
+
+// sending production files
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 // when accessing with localhost use http://localhost:3005 or http://127.0.0.1:3005 followed by api link
 const port = 3005;
